@@ -22,7 +22,7 @@ function getRandomNumber(){
 		+ (Math.floor(Math.random() * 10));
 }
 
-app.get(/^\/new\/http:\/\/.*/, function(req, res){
+app.get("/new/:link(*)", function(req, res){
 	var link = req.params.link;
 	if (false) // wrong format
 	{
@@ -30,7 +30,9 @@ app.get(/^\/new\/http:\/\/.*/, function(req, res){
 			error: "Your url is not in the correct format. Please make sure that the link and protocol are correct."
 		}));
 	} else {
-		res.end("worked");
+		res.end(JSON.stringify({
+			iyzrg: link
+		}));
 		/*
 		var code = 0;
 		while(true){
@@ -70,6 +72,6 @@ app.get("/:code", function(req, res){
 	});
 });
 
-app.listen(3000, function(){
-	console.log("Listening on port 3000...");
+app.listen(3000 || params.env.PORT, function(){
+	console.log("Listening...");
 });
