@@ -1,6 +1,6 @@
 var mongo = require("mongodb").MongoClient;
 var app = require("express")();
-
+/*
 function codeExists(code){
 	mongo.connect("mongodb://127.0.0.1:27017/shorturl", function(err, db){
 		if (err) throw err;
@@ -13,7 +13,7 @@ function codeExists(code){
 			else return false;
 		});
 	});
-}
+}*/
 
 function getRandomNumber(){
 	return (Math.floor(Math.random() * 10) * 1000)
@@ -54,7 +54,7 @@ app.get("/new/:link(*)", function(req, res){
 		});*/
 	}
 });
-
+/*
 app.get("/:code", function(req, res){
 	var code = +req.params.code;
 	mongo.connect("mongodb://127.0.0.1:27017/shorturl", function(err, db){
@@ -70,8 +70,8 @@ app.get("/:code", function(req, res){
 			}
 		});
 	});
-});
+});*/
 
-app.listen(3000 || params.env.PORT, function(){
+app.listen(3000 || process.env.PORT, function(){
 	console.log("Listening...");
 });
