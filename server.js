@@ -60,9 +60,11 @@ app.get("/:code", function(req, res){
 		}).toArray(function(err, docs){
 			if (err) throw err;
 			if (docs.length === 0){
-				res.end("Doesn't exist");
+				res.send(JSON.stringify({
+					error: "This link doesn't exist."
+				}));
 			} else {
-				res.end(docs[0].url);
+				res.redirect(docs[0].url);
 			}
 		});
 	});
