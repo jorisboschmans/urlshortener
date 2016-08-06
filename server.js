@@ -1,4 +1,4 @@
-var mongo = require("mongodb").MongoClient;
+//var mongo = require("mongodb").MongoClient;
 var app = require("express")();
 /*
 function codeExists(code){
@@ -72,6 +72,6 @@ app.get("/:code", function(req, res){
 	});
 });*/
 
-app.listen(3000 || process.env.PORT, function(){
+app.listen(process.env.PORT || 3000, function(){
 	console.log("Listening...");
 });
