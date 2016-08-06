@@ -1,6 +1,6 @@
-//var mongo = require("mongodb").MongoClient;
+var mongo = require("mongodb").MongoClient;
 var app = require("express")();
-/*
+
 function codeExists(code){
 	mongo.connect("mongodb://127.0.0.1:27017/shorturl", function(err, db){
 		if (err) throw err;
@@ -13,7 +13,7 @@ function codeExists(code){
 			else return false;
 		});
 	});
-}*/
+}
 
 function getRandomNumber(){
 	return (Math.floor(Math.random() * 10) * 1000)
@@ -24,16 +24,12 @@ function getRandomNumber(){
 
 app.get("/new/:link(*)", function(req, res){
 	var link = req.params.link;
-	if (false) // wrong format
+	if (!link.match(/^https?:\/\/.+\..+/)) // wrong format
 	{
-		res.end(JSON.stringify({
+		res.send(JSON.stringify({
 			error: "Your url is not in the correct format. Please make sure that the link and protocol are correct."
 		}));
 	} else {
-		res.end(JSON.stringify({
-			iyzrg: link
-		}));
-		/*
 		var code = 0;
 		while(true){
 			code = getRandomNumber();
@@ -46,15 +42,15 @@ app.get("/new/:link(*)", function(req, res){
 				url: link
 			}, function(err, data){
 				if (err) throw err;
-				res.end(JSON.stringify({
+				res.send(JSON.stringify({
 					original_url: link,
 					short_url: "http://127.0.0.1:3000/" + code.toString()
 				}));
 			});
-		});*/
+		});
 	}
 });
-/*
+
 app.get("/:code", function(req, res){
 	var code = +req.params.code;
 	mongo.connect("mongodb://127.0.0.1:27017/shorturl", function(err, db){
@@ -70,7 +66,7 @@ app.get("/:code", function(req, res){
 			}
 		});
 	});
-});*/
+});
 
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Listening...");
