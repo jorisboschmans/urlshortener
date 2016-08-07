@@ -1,8 +1,9 @@
 var mongo = require("mongodb").MongoClient;
 var app = require("express")();
+var url = "mongodb://jorisboschmans:ITrules4565@ds029635.mlab.com:29635/jorisboschmans-mydb";
 
 function codeExists(code){
-	mongo.connect("mongodb://127.0.0.1:27017/shorturl", function(err, db){
+	mongo.connect(url, function(err, db){
 		if (err) throw err;
 		db.collection("url").find({
 			code: code
@@ -35,7 +36,7 @@ app.get("/new/:link(*)", function(req, res){
 			code = getRandomNumber();
 			if (!codeExists(code)) break;
 		}
-		mongo.connect("mongodb://127.0.0.1:27017/shorturl", function(err, db){
+		mongo.connect(url, function(err, db){
 			if (err) throw err;
 			db.collection("url").insert({
 				code: code,
@@ -53,7 +54,7 @@ app.get("/new/:link(*)", function(req, res){
 
 app.get("/:code", function(req, res){
 	var code = +req.params.code;
-	mongo.connect("mongodb://127.0.0.1:27017/shorturl", function(err, db){
+	mongo.connect(url, function(err, db){
 		if (err) throw err;
 		db.collection("url").find({
 			code: code
