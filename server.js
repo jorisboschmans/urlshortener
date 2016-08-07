@@ -46,7 +46,7 @@ app.get("/new/:link(*)", function(req, res){
 				if (err) throw err;
 				res.send(JSON.stringify({
 					original_url: link,
-					short_url: "http://127.0.0.1:3000/" + code.toString()
+					short_url: "https://jorisboschmans-urlshortener.herokuapp.com/" + code.toString()
 				}));
 			});
 		});
