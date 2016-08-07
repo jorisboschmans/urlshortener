@@ -1,11 +1,12 @@
 var mongo = require("mongodb").MongoClient;
 var app = require("express")();
 var url = "mongodb://jorisboschmans:ITrules4565@ds029635.mlab.com:29635/jorisboschmans-mydb";
+var col = "shorturl";
 
 function codeExists(code){
 	mongo.connect(url, function(err, db){
 		if (err) throw err;
-		db.collection("url").find({
+		db.collection(col).find({
 			code: code
 		}).toArray(function(err, docs){
 			if (err) throw err;
@@ -38,7 +39,7 @@ app.get("/new/:link(*)", function(req, res){
 		}
 		mongo.connect(url, function(err, db){
 			if (err) throw err;
-			db.collection("url").insert({
+			db.collection(col).insert({
 				code: code,
 				url: link
 			}, function(err, data){
@@ -56,7 +57,7 @@ app.get("/:code", function(req, res){
 	var code = +req.params.code;
 	mongo.connect(url, function(err, db){
 		if (err) throw err;
-		db.collection("url").find({
+		db.collection(col).find({
 			code: code
 		}).toArray(function(err, docs){
 			if (err) throw err;
